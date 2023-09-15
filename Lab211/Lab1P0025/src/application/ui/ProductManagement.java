@@ -30,8 +30,9 @@ public class ProductManagement {
                         "1. Add a product" + "|" +
                                 "2. Update a product information" + "|" +
                                 "3. Delete product" + "|" +
-                                "4. Show all product" + "|" +
-                                "5. Stop"
+                                "4. Delete product with name" + "|" +
+                                "5. Show all product" + "|" +
+                                "6. Stop"
                 );
                 choice = inputHelper.getIntegerNumber();
                 System.out.println("--------------------------------");
@@ -40,12 +41,13 @@ public class ProductManagement {
                     case 1 -> processWithUserLoop(this::addNewProduct);
                     case 2 -> updateProduct();
                     case 3 -> deleteProduct();
-                    case 4 -> {
+                    case 4 -> deleteProductByName();
+                    case 5 -> {
                         DataIOHelper.printlnMessage(">>>>>> Product List >>>>>>");
                         itemService.printList();
                         DataIOHelper.printlnMessage("--------------------------------");
                     }
-                    case 5 -> isRunning = false;
+                    case 6 -> isRunning = false;
                     default -> Menu.printRequireNotFound();
                 }
 
@@ -187,6 +189,11 @@ public class ProductManagement {
             itemService.delete(code);
         }
         DataIOHelper.printlnMessage("--------------------------------");
+    }
+
+    private void deleteProductByName() {
+        String name = inputHelper.getStringWithMessage("Enter product name: ");
+        itemService.deleteByName(name.toLowerCase());
     }
 
     private void updateProduct() {

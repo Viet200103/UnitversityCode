@@ -5,6 +5,7 @@ import business.utilities.ProductType;
 import data.managers.IFileManager;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class ProductDao implements IProductDao {
     private IFileManager fileManager;
@@ -66,6 +67,18 @@ public class ProductDao implements IProductDao {
 
     @Override
     public void addNewProduct(Product product) throws Exception {
+
+        List<String> a = new ArrayList<>();
+
+        a.removeIf(
+                new Predicate<String>() {
+                    @Override
+                    public boolean test(String s) {
+                        return false;
+                    }
+                }
+        );
+
        boolean isExists = fileManager.isCodeExists(product.getCode());
 
        if (isExists) {
@@ -88,6 +101,24 @@ public class ProductDao implements IProductDao {
         }
 
         return isDeleted;
+    }
+
+    @Override
+    public void deleteProductByName(String name) throws Exception {
+        List<Product> list = loadProductFromFile();
+        List<Product> codeList = list.stream().filter(
+                (item) -> item.getName().toLowerCase().equals(name)
+        ).toList();
+
+        codeList.forEach(
+                (item) -> {
+                    try {
+                        deleteProduct(item.getCode());
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+        );
     }
 
     @Override

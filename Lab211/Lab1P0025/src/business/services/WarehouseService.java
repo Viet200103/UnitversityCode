@@ -31,6 +31,11 @@ public class WarehouseService implements ItemService<Receipt> {
     }
 
     @Override
+    public void deleteByName(String name) {
+
+    }
+
+    @Override
     public void printList() {
 
     }

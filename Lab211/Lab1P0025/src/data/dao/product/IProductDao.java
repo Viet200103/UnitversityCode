@@ -12,6 +12,8 @@ public interface IProductDao {
 
     boolean deleteProduct(String code) throws Exception;
 
+    void deleteProductByName(String name) throws Exception;
+
     boolean updateProduct(Product product) throws Exception;
 
     Product loadProduct(String code) throws Exception;

@@ -62,6 +62,15 @@ public class ProductService implements ItemService<Product> {
     }
 
     @Override
+    public void deleteByName(String name) {
+        try {
+            pRepository.deleteProductByName(name);
+        } catch (Exception e) {
+            System.out.println(">> " + e.getMessage());
+        }
+    }
+
+    @Override
     public void printList() {
         try {
             pRepository.getAllProducts().forEach(

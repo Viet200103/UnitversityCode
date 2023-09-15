@@ -20,6 +20,8 @@ public interface IStoreRepository {
 
     boolean deleteProduct(String productCode) throws Exception;
 
+    void deleteProductByName(String name) throws Exception;
+
     Product getProduct(String code) throws Exception;
 
     boolean updateProduct(Product product) throws Exception;

@@ -8,6 +8,8 @@ public interface ItemService<T> {
 
     void delete(String itemCode);
 
+    void deleteByName(String name);
+
     void printList() throws Exception;
 
     void update(T item);

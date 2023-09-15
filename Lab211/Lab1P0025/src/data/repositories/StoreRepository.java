@@ -26,9 +26,6 @@ public class StoreRepository implements IStoreRepository {
     private final IProductDao productDao;
     private final IWarehouseDao warehouseDao;
 
-    private static StoreRepository INSTANCE;
-
-
     public StoreRepository(
             IFileManager pFileManager,
             IFileManager wFileManager
@@ -60,6 +57,11 @@ public class StoreRepository implements IStoreRepository {
         }
 
         return productDao.deleteProduct(productCode);
+    }
+
+    @Override
+    public void deleteProductByName(String name) throws Exception {
+        productDao.deleteProductByName(name);
     }
 
     @Override
@@ -179,6 +181,8 @@ public class StoreRepository implements IStoreRepository {
             return false;
         }
     }
+
+    private static StoreRepository INSTANCE;
 
     public static IStoreRepository getInstance() {
 
